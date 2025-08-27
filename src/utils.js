@@ -10,8 +10,13 @@
 function countWords(title = "") {
   const parts = String(title).trim().split(/\s+/).filter(Boolean);
   let count = 0;
+
   for (const part of parts) {
-    const cleaned = part.replace(/[^A-Za-z0-9-]+/g, "");
+    const cleaned = part
+    .replace(/[^A-Za-z0-9-]+/g, "")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+    
     if (/[A-Za-z0-9]/.test(cleaned)) count += 1;
   }
   return count;

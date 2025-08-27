@@ -13,4 +13,8 @@ describe("countWords", () => {
     expect(countWords("   ")).toBe(0);
     expect(countWords("one    two   three")).toBe(3);
   });
+
+  test("ignores leading/trailing hyphens", () => {
+    expect(countWords("--hello-- world")).toBe(2);
+  });
 });
