@@ -4,16 +4,36 @@ const path = require("path");
 const DEFAULT_LOG_PATH = path.join(__dirname, "..", "usage.json");
 
 /**
- * Save a usage event with the required fields.
+ * Write a usage event to a JSON file.
  *
- * @param {{ filter: string }} data
+ * Always saves:
+ *   - ts: timestamp (ISO string)
+ *   - filter: applied filter
+ *
+ * If provided:
+ *   - endpoint
+ *   - durationMs
+ *   - resultCount
+ *   - userAgent
+ *
+ * @param {Object} data 
+ * @param {string} data.filter
+ * @param {string} [data.endpoint]
+ * @param {number} [data.durationMs]
+ * @param {number} [data.count]
+ * @param {string} [data.ua]
  * @param {string} [filePath]
- * @returns {{ ts: string, filter: string }}
+ * @returns {Object} event
  */
-function logUsage({ filter }, filePath = DEFAULT_LOG_PATH) {
+
+function logUsage({ endpoint, filter = "none", durationMs = null, count = null, ua = "" }, filePath = DEFAULT_LOG_PATH) {
   const event = {
     ts: new Date().toISOString(),
+    endpoint,
     filter,
+    durationMs,
+    resultCount: count,
+    userAgent: ua,
   };
 
   try {
@@ -22,7 +42,7 @@ function logUsage({ filter }, filePath = DEFAULT_LOG_PATH) {
     prev.push(event);
     fs.writeFileSync(filePath, JSON.stringify(prev, null, 2));
   } catch {
-    // don't crash if logging fails
+    // ignore logging errors
   }
 
   return event;
