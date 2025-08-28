@@ -24,6 +24,7 @@ The app does three main things:
 Install dependencies:
 ```bash
 npm install
+```
 
 ## Author
 Clara Bolívar Peláez
