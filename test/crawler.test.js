@@ -1,5 +1,5 @@
-const axios = require("axios");  //to make HTTP requests
 jest.mock("axios"); // to avoid real network requests during tests
+const axios = require("axios");  //to make HTTP requests
 
 const { fetchTop30 } = require("../src/crawler");
 

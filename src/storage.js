@@ -12,28 +12,22 @@ const DEFAULT_LOG_PATH = path.join(__dirname, "..", "usage.json");
  *
  * If provided:
  *   - endpoint
- *   - durationMs
  *   - resultCount
- *   - userAgent
  *
  * @param {Object} data 
  * @param {string} data.filter
  * @param {string} [data.endpoint]
- * @param {number} [data.durationMs]
  * @param {number} [data.count]
- * @param {string} [data.ua]
  * @param {string} [filePath]
  * @returns {Object} event
  */
 
-function logUsage({ endpoint, filter = "none", durationMs = null, count = null, ua = "" }, filePath = DEFAULT_LOG_PATH) {
+function logUsage({ endpoint, filter = "none", count = null }, filePath = DEFAULT_LOG_PATH) {
   const event = {
     ts: new Date().toISOString(),
     endpoint,
     filter,
-    durationMs,
     resultCount: count,
-    userAgent: ua,
   };
 
   try {

@@ -16,7 +16,7 @@ function filterMoreThanFiveWords(entries = []) {
     return words > 5;
   });
 
-  // sort by comments desc, then points desc, then number desc
+  // sort by comments desc, then points desc, then number asc
   filtered.sort((a, b) => {
     if (b.comments !== a.comments) {
       return b.comments - a.comments;
@@ -24,11 +24,12 @@ function filterMoreThanFiveWords(entries = []) {
     if (b.points !== a.points) {
       return b.points - a.points;
     }
-    return b.number - a.number;
+    return a.number - b.number;
   });
 
   return filtered;
 }
+
 
 /**
  * Returns entries whose title has five or fewer words,
@@ -46,7 +47,7 @@ function filterFiveOrLessWords(entries = []) {
     return words <= 5;
   });
 
-  // sort by points desc, then comments desc, then number desc
+  // sort by points desc, then comments desc, then number asc
 
   filtered.sort((a, b) => {
     if (b.points !== a.points) {
@@ -55,7 +56,7 @@ function filterFiveOrLessWords(entries = []) {
     if (b.comments !== a.comments) {
       return b.comments - a.comments;
     }
-    return b.number - a.number;
+    return a.number - b.number;
   });
 
   return filtered;
